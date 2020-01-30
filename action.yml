@@ -1,0 +1,34 @@
+name: 'FTP Deployer'
+author: 'sand4rt'
+description: 'Deploy your folder via ftp with NodeJS'
+branding:
+  color: white
+  icon: upload-cloud
+inputs:
+  host:
+    description: 'FTP host URL like: ftp.host.com'
+    required: true
+  port:
+    description: 'FTP port'
+    required: false
+    default: '21'
+  username:
+    required: true
+    description: 'Ftp username'
+  password:
+    required: true
+    description: 'Ftp password'
+  remote_folder:
+    required: true
+    description: 'The remote folder location of your FTP server'
+  local_folder:
+     required: true
+     default: dist
+     description: 'The local folder location'
+  cleanup:
+    required: false
+    default: false
+    description: 'Remove existing files inside FTP remote folder'
+runs:
+  using: 'node12'
+  main: 'index.js'
