@@ -11,7 +11,7 @@ inputs:
   port:
     description: 'FTP port'
     required: false
-    default: '21'
+    default: 21
   username:
     required: true
     description: 'Ftp username'
@@ -22,13 +22,25 @@ inputs:
     required: true
     description: 'The remote folder location of your FTP server'
   local_folder:
-     required: true
+     required: false
      default: dist
      description: 'The local folder location'
   cleanup:
     required: false
     default: false
     description: 'Remove existing files inside FTP remote folder'
+  include:
+    required: false
+    default: false
+    description: 'includes'
+  exclude:
+    required: false
+    default: false
+    description: 'exclude'
+  pasive:
+    required: false
+    default: false
+    description: 'passive'
 runs:
   using: 'node12'
   main: 'index.js'
