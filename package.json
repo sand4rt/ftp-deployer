@@ -1,0 +1,29 @@
+{
+  "name": "ftp-deployer",
+  "version": "1.0.0",
+  "description": "Fast nodejs ftp deployment with github actions",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sand4rt/ftp-deployer.git"
+  },
+  "keywords": [
+    "FTP",
+    "Github",
+    "Actions",
+    "Deploy"
+  ],
+  "author": "sand4rt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sand4rt/ftp-deployer/issues"
+  },
+  "homepage": "https://github.com/sand4rt/ftp-deployer#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.2",
+    "ftp-deploy": "^2.3.6"
+  }
+}
