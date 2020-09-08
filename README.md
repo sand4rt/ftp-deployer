@@ -10,8 +10,8 @@ Fast nodejs ftp deployment with github actions.
   with:
     # FTP host URL like: ftp.host.com
     host: ${{ secrets.FTP_HOST }}
-    # FTP port
-    port: # optional, default is 21
+    # FTP port default is: 21
+    port: # optional
     # Ftp username
     username: ${{ secrets.FTP_USERNAME }}
     # Ftp password
@@ -19,17 +19,14 @@ Fast nodejs ftp deployment with github actions.
     # The remote folder location of your FTP server
     remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }}
     # The local folder location
-    local_folder: dist# optional, default is dist
+    local_folder: dist # optional, default is dist
     # Remove existing files inside FTP remote folder
     cleanup: false # optional
-    # includes
     include: '' # optional
-    # exclude
     exclude: # optional
       - node_modules/**
       - node_modules/**/.*
       - .git/**
       - *.env
-    # passive
     pasive: true # optional
 ```
