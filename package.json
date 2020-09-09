@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/sand4rt/ftp-deployer#readme",
   "dependencies": {
-    "@actions/core": "^1.2.2",
-    "ftp-deploy": "^2.3.6"
+    "@actions/core": "^1.2.5",
+    "ftp-deploy": "^2.3.7"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.22.3"

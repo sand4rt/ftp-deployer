@@ -9285,14 +9285,28 @@ class Command {
         return cmdStr;
     }
 }
+/**
+ * Sanitizes an input into a string so it can be passed into issueCommand safely
+ * @param input input to sanitize into a string
+ */
+function toCommandValue(input) {
+    if (input === null || input === undefined) {
+        return '';
+    }
+    else if (typeof input === 'string' || input instanceof String) {
+        return input;
+    }
+    return JSON.stringify(input);
+}
+exports.toCommandValue = toCommandValue;
 function escapeData(s) {
-    return (s || '')
+    return toCommandValue(s)
         .replace(/%/g, '%25')
         .replace(/\r/g, '%0D')
         .replace(/\n/g, '%0A');
 }
 function escapeProperty(s) {
-    return (s || '')
+    return toCommandValue(s)
         .replace(/%/g, '%25')
         .replace(/\r/g, '%0D')
         .replace(/\n/g, '%0A')
@@ -9383,11 +9397,13 @@ var ExitCode;
 /**
  * Sets env variable for this action and future actions in the job
  * @param name the name of the variable to set
- * @param val the value of the variable
+ * @param val the value of the variable. Non-string values will be converted to a string via JSON.stringify
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function exportVariable(name, val) {
-    process.env[name] = val;
-    command_1.issueCommand('set-env', { name }, val);
+    const convertedVal = command_1.toCommandValue(val);
+    process.env[name] = convertedVal;
+    command_1.issueCommand('set-env', { name }, convertedVal);
 }
 exports.exportVariable = exportVariable;
 /**
@@ -9426,12 +9442,22 @@ exports.getInput = getInput;
  * Sets the value of an output.
  *
  * @param     name     name of the output to set
- * @param     value    value to store
+ * @param     value    value to store. Non-string values will be converted to a string via JSON.stringify
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function setOutput(name, value) {
     command_1.issueCommand('set-output', { name }, value);
 }
 exports.setOutput = setOutput;
+/**
+ * Enables or disables the echoing of commands into stdout for the rest of the step.
+ * Echoing is disabled by default if ACTIONS_STEP_DEBUG is not set.
+ *
+ */
+function setCommandEcho(enabled) {
+    command_1.issue('echo', enabled ? 'on' : 'off');
+}
+exports.setCommandEcho = setCommandEcho;
 //-----------------------------------------------------------------------
 // Results
 //-----------------------------------------------------------------------
@@ -9449,6 +9475,13 @@ exports.setFailed = setFailed;
 // Logging Commands
 //-----------------------------------------------------------------------
 /**
+ * Gets whether Actions Step Debug is on or not
+ */
+function isDebug() {
+    return process.env['RUNNER_DEBUG'] === '1';
+}
+exports.isDebug = isDebug;
+/**
  * Writes debug message to user log
  * @param message debug message
  */
@@ -9458,18 +9491,18 @@ function debug(message) {
 exports.debug = debug;
 /**
  * Adds an error issue
- * @param message error issue message
+ * @param message error issue message. Errors will be converted to string via toString()
  */
 function error(message) {
-    command_1.issue('error', message);
+    command_1.issue('error', message instanceof Error ? message.toString() : message);
 }
 exports.error = error;
 /**
  * Adds an warning issue
- * @param message warning issue message
+ * @param message warning issue message. Errors will be converted to string via toString()
  */
 function warning(message) {
-    command_1.issue('warning', message);
+    command_1.issue('warning', message instanceof Error ? message.toString() : message);
 }
 exports.warning = warning;
 /**
@@ -9527,8 +9560,9 @@ exports.group = group;
  * Saves state for current action, the state can only be retrieved by this action's post job execution.
  *
  * @param     name     name of the state to store
- * @param     value    value to store
+ * @param     value    value to store. Non-string values will be converted to a string via JSON.stringify
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function saveState(name, value) {
     command_1.issueCommand('save-state', { name }, value);
 }
@@ -18483,25 +18517,25 @@ const lib = __webpack_require__(690);
 }
 */
 
-const FtpDeployer = function() {
+const FtpDeployer = function () {
     // The constructor for the super class.
     events.EventEmitter.call(this);
     this.ftp = null;
     this.eventObject = {
         totalFilesCount: 0,
         transferredFileCount: 0,
-        filename: ""
+        filename: "",
     };
 
-    this.makeAllAndUpload = function(remoteDir, filemap) {
+    this.makeAllAndUpload = function (remoteDir, filemap) {
         let keys = Object.keys(filemap);
-        return Promise.mapSeries(keys, key => {
+        return Promise.mapSeries(keys, (key) => {
             // console.log("Processing", key, filemap[key]);
             return this.makeAndUpload(remoteDir, key, filemap[key]);
         });
     };
 
-    this.makeDir = function(newDirectory) {
+    this.makeDir = function (newDirectory) {
         if (newDirectory === "/") {
             return Promise.resolve("unused");
         } else {
@@ -18514,7 +18548,7 @@ const FtpDeployer = function() {
         let newDirectory = upath.join(config.remoteRoot, relDir);
         return this.makeDir(newDirectory, true).then(() => {
             // console.log("newDirectory", newDirectory);
-            return Promise.mapSeries(fnames, fname => {
+            return Promise.mapSeries(fnames, (fname) => {
                 let tmpFileName = upath.join(config.localRoot, relDir, fname);
                 let tmp = fs.readFileSync(tmpFileName);
                 this.eventObject["filename"] = upath.join(relDir, fname);
@@ -18528,7 +18562,7 @@ const FtpDeployer = function() {
                         this.emit("uploaded", this.eventObject);
                         return Promise.resolve("uploaded " + tmpFileName);
                     })
-                    .catch(err => {
+                    .catch((err) => {
                         this.eventObject["error"] = err;
                         this.emit("upload-error", this.eventObject);
                         // if continue on error....
@@ -18539,19 +18573,27 @@ const FtpDeployer = function() {
     };
 
     // connects to the server, Resolves the config on success
-    this.connect = config => {
+    this.connect = (config) => {
         this.ftp = new PromiseFtp();
 
-        return this.ftp.connect(config).then(serverMessage => {
-            this.emit("log", "Connected to: " + config.host);
-            this.emit("log", "Connected: Server message: " + serverMessage);
+        return this.ftp
+            .connect(config)
+            .then((serverMessage) => {
+                this.emit("log", "Connected to: " + config.host);
+                this.emit("log", "Connected: Server message: " + serverMessage);
 
-            return config;
-        });
+                return config;
+            })
+            .catch((err) => {
+                return Promise.reject({
+                    code: err.code,
+                    message: "connect: " + err.message,
+                });
+            });
     };
 
     // creates list of all files to upload and starts upload process
-    this.checkLocalAndUpload = config => {
+    this.checkLocalAndUpload = (config) => {
         try {
             let filemap = lib.parseLocal(
                 config.include,
@@ -18574,7 +18616,7 @@ const FtpDeployer = function() {
 
     // Deletes remote directory if requested by config
     // Returns config
-    this.deleteRemote = config => {
+    this.deleteRemote = (config) => {
         if (config.deleteRemote) {
             return lib
                 .deleteDir(this.ftp, config.remoteRoot)
@@ -18582,7 +18624,7 @@ const FtpDeployer = function() {
                     this.emit("log", "Deleted directory: " + config.remoteRoot);
                     return config;
                 })
-                .catch(err => {
+                .catch((err) => {
                     this.emit(
                         "log",
                         "Deleting failed, trying to continue: " +
@@ -18594,14 +18636,14 @@ const FtpDeployer = function() {
         return Promise.resolve(config);
     };
 
-    this.deploy = function(config, cb) {
+    this.deploy = function (config, cb) {
         return lib
             .checkIncludes(config)
             .then(lib.getPassword)
             .then(this.connect)
             .then(this.deleteRemote)
             .then(this.checkLocalAndUpload)
-            .then(res => {
+            .then((res) => {
                 this.ftp.end();
                 if (typeof cb == "function") {
                     cb(null, res);
@@ -18609,7 +18651,8 @@ const FtpDeployer = function() {
                     return Promise.resolve(res);
                 }
             })
-            .catch(err => {
+            .catch((err) => {
+                console.log("Err", err.message);
                 if (
                     this.ftp &&
                     this.ftp.getConnectionStatus() != "disconnected"
