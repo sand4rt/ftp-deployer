@@ -5,7 +5,7 @@ core.info('Deploying...');
 
 new FtpDeploy()
     .deploy({
-        host: core.getInput('user', { required: true }),
+        host: core.getInput('host', { required: true }),
         port: JSON.parse(core.getInput('port')) || 21,
         user: core.getInput('username', { required: true }),
         password: core.getInput('password', { required: true }),
