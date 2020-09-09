@@ -9,7 +9,7 @@ new FtpDeploy()
         port: JSON.parse(core.getInput('port')) || 21,
         user: core.getInput('username', { required: true }),
         password: core.getInput('password', { required: true }),
-        remoteRoot: core.getInput('remote_folder', { required: true }),
+        remoteRoot: core.getInput('remote_folder') || '',
         localRoot: core.getInput('local_folder') || 'dist', // __dirname + '/local-folder',
         deleteRemote: JSON.parse(core.getInput('cleanup')) || false, // If true, delete ALL existing files at destination before uploading
         include: JSON.parse(core.getInput('include')) || [], // this would upload everything except dot files

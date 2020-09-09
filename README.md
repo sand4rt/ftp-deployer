@@ -17,7 +17,7 @@ Fast nodejs ftp deployment with github actions.
     # Ftp password
     password: ${{ secrets.FTP_PASSWORD }}
     # The remote folder location of your FTP server
-    remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }}
+    remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }} # optional
     # The local folder location
     local_folder: dist # optional, default is dist
     # Remove existing files inside FTP remote folder

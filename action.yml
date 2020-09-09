@@ -19,7 +19,7 @@ inputs:
     required: true
     description: 'Ftp password'
   remote_folder:
-    required: true
+    required: false
     description: 'The remote folder location of your FTP server'
   local_folder:
      required: false
