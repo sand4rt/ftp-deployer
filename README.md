@@ -6,7 +6,7 @@ Fast nodejs ftp deployment with github actions.
 
 ``` yml
 - name: FTP Deployer
-  uses: sand4rt/ftp-deployer@v0.1
+  uses: sand4rt/ftp-deployer@v0.9
   with:
     # FTP host URL like: ftp.host.com
     host: ${{ secrets.FTP_HOST }}
