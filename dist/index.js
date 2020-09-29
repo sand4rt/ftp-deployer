@@ -3118,7 +3118,7 @@ new FtpDeploy()
         exclude: JSON.parse(core.getInput('exclude')) || ['node_modules/**', 'node_modules/**/.*', '.git/**'], // e.g. exclude sourcemaps, and ALL files in node_modules (including dot files)
         forcePasv: JSON.parse(core.getInput('pasive')) || true // Passive mode is forced (EPSV command is not sent)
     }) 
-    .then(response => core.log('Deploy finished:', response))
+    .then(response => core.info('Deploy finished:', response))
     .catch(error => core.error(error));
 
 /***/ }),
