@@ -1,6 +1,6 @@
 name: 'FTP Deployer'
 author: 'sand4rt'
-description: 'Deploy your folder via ftp with NodeJS'
+description: 'Fast and simple FTP deployment with NodeJS'
 branding:
   color: white
   icon: upload-cloud
