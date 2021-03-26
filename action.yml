@@ -1,17 +1,17 @@
 name: 'FTP Deployer'
 author: 'sand4rt'
-description: 'Fast and simple FTP deployment with NodeJS'
+description: 'Fast and simple SFTP / FTP deployment with NodeJS'
 branding:
   color: white
   icon: upload-cloud
 inputs:
+  port:
+    description: 'SFTP on'
+    required: false
+    default: false
   host:
     description: 'FTP host URL like: ftp.host.com or sftp.host.com'
     required: true
-  port:
-    description: 'sFTP on'
-    required: false
-    default: false
   port:
     description: 'FTP port'
     required: false
