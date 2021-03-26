@@ -1,4 +1,4 @@
-# GitHub action - FTP deployer
+# GitHub action - SFTP / FTP deployer
 
 Fast nodejs ftp deployment with github actions.
 
