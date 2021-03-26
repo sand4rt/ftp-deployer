@@ -5,6 +5,7 @@ core.info('Deploying...');
 
 new FtpDeploy()
     .deploy({
+        sftp: JSON.parse(core.getInput('sftp')) || false,
         host: core.getInput('host', { required: true }),
         port: JSON.parse(core.getInput('port')) || 21,
         user: core.getInput('username', { required: true }),

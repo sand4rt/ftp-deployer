@@ -6,8 +6,12 @@ branding:
   icon: upload-cloud
 inputs:
   host:
-    description: 'FTP host URL like: ftp.host.com'
+    description: 'FTP host URL like: ftp.host.com or sftp.host.com'
     required: true
+  port:
+    description: 'sFTP on'
+    required: false
+    default: false
   port:
     description: 'FTP port'
     required: false
