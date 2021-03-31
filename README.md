@@ -13,9 +13,9 @@ Fast nodejs ftp deployment with github actions.
     host: ${{ secrets.FTP_HOST }}
     # FTP port default is: 21
     port: 21 # optional
-    # Ftp username
+    # FTP username
     username: ${{ secrets.FTP_USERNAME }}
-    # Ftp password
+    # FTP password
     password: ${{ secrets.FTP_PASSWORD }}
     # The remote folder location of your FTP server
     remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }} # optional
