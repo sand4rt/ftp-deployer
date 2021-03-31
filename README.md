@@ -9,25 +9,19 @@ Fast nodejs ftp deployment with github actions.
   uses: sand4rt/ftp-deployer@v1.3
   with:
     sftp: false
-    # FTP host URL like: ftp.host.com or sftp.host.com
-    host: ${{ secrets.FTP_HOST }}
-    # FTP port default is: 21
-    port: 21 # optional
-    # FTP username
-    username: ${{ secrets.FTP_USERNAME }}
-    # FTP password
-    password: ${{ secrets.FTP_PASSWORD }}
-    # The remote folder location of your FTP server
-    remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }} # optional
-    # The local folder location
-    local_folder: dist # optional, default is dist
-    # Remove existing files inside FTP remote folder
-    cleanup: false # optional
-    include: '' # optional
-    exclude: # optional
-      - node_modules/**
-      - node_modules/**/.*
-      - .git/**
-      - *.env
+    host: ${{ secrets.FTP_HOST }} # e.g. ftp.host.com or sftp.host.com
+    port: 21 # optional, default is: 21
+    username: ${{ secrets.FTP_USERNAME }} # FTP username
+    password: ${{ secrets.FTP_PASSWORD }} # FTP password
+    remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }} # optional, remote path of your FTP server
+    local_folder: dist # optional, local path, default is: dist
+    cleanup: false # optional, remove existing files inside FTP remote folder
+    include: '' # optional, e.g.
+      # - dist
+    exclude: '' # optional
+      # - node_modules/**
+      # - node_modules/**/.*
+      # - .git/**
+      # - *.env
     pasive: true # optional
 ```
