@@ -8,7 +8,7 @@ Fast nodejs ftp deployment with github actions.
 - name: FTP Deployer
   uses: sand4rt/ftp-deployer@v1.3
   with:
-    sftp: false
+    sftp: false # optional
     host: ${{ secrets.FTP_HOST }} # e.g. ftp.host.com or sftp.host.com
     port: 21 # optional, default is: 21
     username: ${{ secrets.FTP_USERNAME }} # FTP username
