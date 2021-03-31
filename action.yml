@@ -5,7 +5,7 @@ branding:
   color: white
   icon: upload-cloud
 inputs:
-  port:
+  sftp:
     description: 'SFTP on'
     required: false
     default: false
