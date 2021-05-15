@@ -16,12 +16,7 @@ Fast nodejs ftp deployment with github actions.
     remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }} # optional, remote path of your FTP server
     local_folder: dist # optional, local path, default is: dist
     cleanup: false # optional, remove existing files inside FTP remote folder
-    include: '' # optional, e.g.
-      # - dist
-    exclude: '' # optional
-      # - node_modules/**
-      # - node_modules/**/.*
-      # - .git/**
-      # - *.env
+    include: [] # optional, e.g. ['dist']
+    exclude: [] # optional, e.g. ['node_modules/**', '.git/**', '*.env']
     pasive: true # optional
 ```
