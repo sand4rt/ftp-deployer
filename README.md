@@ -1,6 +1,6 @@
 # GitHub action - SFTP / FTP deployer
 
-Fast nodejs ftp deployment with github actions.
+Nodejs ftp deployment with github actions.
 
 ## Example
 
