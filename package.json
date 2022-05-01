@@ -1,7 +1,7 @@
 {
   "name": "ftp-deployer",
-  "version": "1.0.0",
-  "description": "Fast nodejs ftp deployment with github actions",
+  "version": "1.0.1",
+  "description": "NodeJS ftp deployment with github actions",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/sand4rt/ftp-deployer#readme",
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "ftp-deploy": "^2.4.1"
+    "@actions/core": "^1.7.0",
+    "ftp-deploy": "^2.3.8"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.22.3"
