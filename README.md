@@ -6,7 +6,7 @@ Nodejs ftp deployment with github actions.
 
 ``` yml
 - name: FTP Deployer
-  uses: sand4rt/ftp-deployer@v1.4
+  uses: sand4rt/ftp-deployer@v1.5
   with:
     sftp: false # optional
     host: ${{ secrets.FTP_HOST }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)

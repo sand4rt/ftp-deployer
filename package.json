@@ -1,6 +1,6 @@
 {
   "name": "ftp-deployer",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "NodeJS ftp deployment with github actions",
   "main": "index.js",
   "scripts": {
