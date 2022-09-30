@@ -41,7 +41,7 @@ inputs:
     required: false
     default: false
     description: 'exclude'
-  pasive:
+  passive:
     required: false
     default: false
     description: 'passive'

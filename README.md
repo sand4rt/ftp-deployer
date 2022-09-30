@@ -18,5 +18,5 @@ Nodejs ftp deployment with github actions.
     cleanup: false # optional, remove existing files inside FTP remote folder
     include: '[]' # optional, e.g. '['dist']'
     exclude: '[]' # optional, e.g. '['node_modules/**', '.git/**', '*.env']'
-    pasive: true # optional
+    passive: true # optional
 ```
