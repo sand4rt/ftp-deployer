@@ -6,7 +6,7 @@ Simple SFTP / FTP deployment with NodeJS.
 
 ``` yml
 - name: FTP Deployer
-  uses: sand4rt/ftp-deployer@v1.6
+  uses: sand4rt/ftp-deployer@v1.7
   with:
     sftp: false # optional
     host: ${{ secrets.FTP_HOST }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)

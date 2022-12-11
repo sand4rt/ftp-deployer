@@ -1,6 +1,6 @@
 {
   "name": "ftp-deployer",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Simple SFTP / FTP deployment with NodeJS",
   "main": "index.js",
   "scripts": {

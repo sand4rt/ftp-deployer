@@ -18,4 +18,4 @@ new FtpDeploy()
         forcePasv: JSON.parse(core.getInput('passive')) || true // Passive mode is forced (EPSV command is not sent)
     }) 
     .then(response => core.info('Deploy finished:', response))
-    .catch(error => core.error(error));
+    .catch(error => core.setFailed(error));
