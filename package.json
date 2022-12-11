@@ -1,8 +1,9 @@
 {
-  "name": "ftp-deployer",
+  "name": "@sand4rt/ftp-deployer",
   "version": "1.0.7",
   "description": "Simple SFTP / FTP deployment with NodeJS",
-  "main": "index.js",
+  "private": false,
+  "main": "dist/index.js",
   "scripts": {
     "start": "node src/index.js",
     "build": "ncc build index.js"
