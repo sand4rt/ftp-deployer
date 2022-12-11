@@ -1,12 +1,12 @@
 # GitHub action - SFTP / FTP deployer
 
-Nodejs ftp deployment with github actions.
+Simple SFTP / FTP deployment with NodeJS.
 
 ## Example
 
 ``` yml
 - name: FTP Deployer
-  uses: sand4rt/ftp-deployer@v1.5
+  uses: sand4rt/ftp-deployer@v1.6
   with:
     sftp: false # optional
     host: ${{ secrets.FTP_HOST }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)
