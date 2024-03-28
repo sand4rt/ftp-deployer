@@ -1,6 +1,6 @@
 {
   "name": "@sand4rt/ftp-deployer",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Simple SFTP / FTP deployment with NodeJS",
   "main": "dist/index.js",
   "scripts": {
